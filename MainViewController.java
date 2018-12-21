@@ -13,6 +13,8 @@ import application.LoginManager;
 public class MainViewController {
   @FXML private Button logoutButton;
   @FXML private Button passwordsButton;
+  @FXML private Button deleteButton;
+  @FXML private Button editButton;
   @FXML private Text  sessionLabel;
   @FXML private Text  savedPasswords;
   @FXML private Text  unsafePasswords;
@@ -60,6 +62,27 @@ public class MainViewController {
 		  @Override public void handle(ActionEvent event) {
 			  try {
 				loginManager.showPasswordsView(userID);
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		  }
+	  });
+	  editButton.setOnAction(new EventHandler<ActionEvent>() {
+		  @Override public void handle(ActionEvent event) {
+			  try {
+				loginManager.showEditUserView(userID);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		  }
+	  });
+	  deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+		  @Override public void handle(ActionEvent event) {
+			  try {
+				MySQLAccess.deleteUser(userID);
+				loginManager.logout();
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

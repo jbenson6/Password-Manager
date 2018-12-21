@@ -9,6 +9,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import application.PasswordEncryptionService;
+import javafx.scene.control.TextField;
 
 public class MySQLAccess {
 
@@ -181,8 +182,8 @@ public class MySQLAccess {
 		// Result set get the result of the SQL query
 		//resultSet = statement.executeQuery("select * from password_manager.users");
 		//writeResultSet(resultSet);
-		String query = ("INSERT INTO sites (id, user_id, user_name, username, domain_name, url, cypher_text, secret_key) "
-				+ "VALUES (default, ? , ? , ? , ? , ?, ?, ?)"); 
+		String query = "INSERT INTO sites (id, user_id, user_name, username, domain_name, url, cypher_text, secret_key) "
+				+ "VALUES (default, ? , ? , ? , ? , ?, ?, ?)"; 
 		PreparedStatement preparedStatement = connect.prepareStatement(query);
 		preparedStatement.setInt(1, userID.getInt(1));
 		preparedStatement.setString(2, userID.getString(2));
@@ -212,8 +213,8 @@ public class MySQLAccess {
 		// Result set get the result of the SQL query
 		//resultSet = statement.executeQuery("select * from password_manager.users");
 		//writeResultSet(resultSet);
-		String query = ("DELETE from sites WHERE user_id=? && user_name=? && username=? && "
-				+ "domain_name=? && url=? && cypher_text=? && secret_key=?"); 
+		String query = "DELETE from sites WHERE user_id=? && user_name=? && username=? && "
+				+ "domain_name=? && url=? && cypher_text=? && secret_key=?"; 
 		PreparedStatement preparedStatement = connect.prepareStatement(query);
 		preparedStatement.setInt(1, userID.getInt(1));
 		preparedStatement.setString(2, userID.getString(2));
@@ -259,6 +260,92 @@ public class MySQLAccess {
 //		rs.close();
 		//connect.close();
 		return rows;
+	}
+
+	public static void deleteUser(ResultSet userID) throws SQLException, ClassNotFoundException {
+		// TODO Auto-generated method stub
+		Connection connect = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		// Setup the connection with the DB
+		connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/password_manager", "password_manager", "");
+
+		// Statements allow to issue SQL queries to the database
+		// Result set get the result of the SQL query
+		//resultSet = statement.executeQuery("select * from password_manager.users");
+		//writeResultSet(resultSet);
+		String query = "DELETE from users WHERE user_name=? && first_name=? && last_name=?"; 
+		PreparedStatement preparedStatement = connect.prepareStatement(query);
+		preparedStatement.setString(1, userID.getString("user_name"));
+		preparedStatement.setString(2, userID.getString("first_name"));
+		preparedStatement.setString(3, userID.getString("last_name"));
+
+		preparedStatement.execute();
+		connect.close();
+		
+	}
+	public static ResultSet editUser(String firstname, String lastname, byte[] salt, byte[] encryptedPassword, ResultSet userID) throws SQLException, ClassNotFoundException {
+		// TODO Auto-generated method stub
+		Connection connect = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		// Setup the connection with the DB
+		connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/password_manager", "password_manager", "");
+
+		// Statements allow to issue SQL queries to the database
+		// Result set get the result of the SQL query
+		//resultSet = statement.executeQuery("select * from password_manager.users");
+		//writeResultSet(resultSet);
+		String query = "Update users SET first_name=?, last_name=?, salt=?, encrypted_password=? WHERE user_name=?"; 
+		PreparedStatement preparedStatement = connect.prepareStatement(query);
+		preparedStatement.setString(1, firstname);
+		preparedStatement.setString(2, lastname);
+		preparedStatement.setBytes(3, salt);
+		preparedStatement.setBytes(4, encryptedPassword);
+		preparedStatement.setString(5, userID.getString("user_name"));
+
+		preparedStatement.execute();
+		
+		String query_2 = "Select * from users WHERE user_name=?";
+		PreparedStatement pstmt = connect.prepareStatement(query_2);
+		pstmt.setString(1, userID.getString("user_name"));
+		ResultSet rs_final = pstmt.executeQuery();
+		//System.out.println(rs_final);
+		//pstmt1.close();
+		//rs.close();
+		//pstmt.close();
+		return rs_final;
+		
+	}
+
+	public static ResultSet editUser(String firstname, String lastname, ResultSet userID) throws SQLException, ClassNotFoundException {
+		// TODO Auto-generated method stub
+		Connection connect = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		// Setup the connection with the DB
+		connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/password_manager", "password_manager", "");
+
+		// Statements allow to issue SQL queries to the database
+		// Result set get the result of the SQL query
+		//resultSet = statement.executeQuery("select * from password_manager.users");
+		//writeResultSet(resultSet);
+		String query = "Update users SET first_name=?, last_name=? WHERE user_name=?"; 
+		PreparedStatement preparedStatement = connect.prepareStatement(query);
+		preparedStatement.setString(1, firstname);
+		preparedStatement.setString(2, lastname);
+		preparedStatement.setString(3, userID.getString("user_name"));
+
+		preparedStatement.execute();
+		
+		String query_2 = "Select * from users WHERE user_name=?";
+		PreparedStatement pstmt = connect.prepareStatement(query_2);
+		pstmt.setString(1, userID.getString("user_name"));
+		ResultSet rs_final = pstmt.executeQuery();
+		//System.out.println(rs_final);
+		//pstmt1.close();
+		//rs.close();
+		//pstmt.close();
+		return rs_final;
+		
+		
 	}
 
 }

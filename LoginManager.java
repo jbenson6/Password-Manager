@@ -102,5 +102,19 @@ public void showSignUpView() {
 	      Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 }
+public void showEditUserView(ResultSet userID) throws SQLException {
+	// TODO Auto-generated method stub
+	try {
+	      FXMLLoader loader = new FXMLLoader(
+	        getClass().getResource("edituserview.fxml")
+	      );
+	      scene.setRoot((Parent) loader.load());
+	      EditViewController controller = 
+	        loader.<EditViewController>getController();
+	      controller.initSessionID(this, userID);
+	    } catch (IOException ex) {
+	      Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+}
   
 }
