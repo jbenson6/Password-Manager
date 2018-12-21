@@ -7,8 +7,8 @@ access password_manager schema. This can be done in the MySQL Workbench
 
 Table Format:
 CREATE TABLE `sites` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
   `user_name` varchar(32) NOT NULL,
   `username` varchar(32) NOT NULL,
   `domain_name` varchar(32) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE `sites` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `user_name` varchar(32) NOT NULL,
   `first_name` varchar(32) NOT NULL,
   `last_name` varchar(32) NOT NULL,
