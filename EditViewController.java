@@ -23,31 +23,37 @@ public class EditViewController {
   @FXML private PasswordField confirmpassword;
   @FXML private Text editerror;
   boolean passwordMatch;
- 
+  boolean fill; 
   
   public void initialize() {}
-  
+
   public void initSessionID(final LoginManager loginManager, ResultSet userID) throws SQLException {
-    //sessionLabel.get.add("application/mainview.css");
+	  //sessionLabel.get.add("application/mainview.css");
 	  firstname.setText(userID.getString("first_name"));
 	  lastname.setText(userID.getString("last_name"));
 
-    editButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override public void handle(ActionEvent event) {
-    	  try {
-			ResultSet newuserID = editUser(userID);
-			if(passwordMatch == true) {
-				loginManager.showMainView(newuserID);
-			} else {
-				editerror.setText("Passwords Don't Match");
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-      }
-      
-    });
+	  editButton.setOnAction(new EventHandler<ActionEvent>() {
+		  @Override public void handle(ActionEvent event) {
+			  try {
+				  ResultSet newuserID = editUser(userID);
+				  if(passwordMatch == true) {
+					  if (fill == true) {
+						  loginManager.showMainView(newuserID);
+					  } else {
+						  editerror.setText("First Name and Last Name Must be Filled In");
+					  }
+				  } else if (fill == false){
+					  editerror.setText("First Name and Last Name Must be Filled In");
+				  } else {
+					  editerror.setText("Passwords Don't Match");
+				  }
+			  } catch (Exception e) {
+				  // TODO Auto-generated catch block
+				  e.printStackTrace();
+			  }
+		  }
+
+	  });
     cancelButton.setOnAction(new EventHandler<ActionEvent>() {
         @Override public void handle(ActionEvent event) {
         	try {
@@ -62,37 +68,42 @@ public class EditViewController {
   private ResultSet editUser(ResultSet userID) throws ClassNotFoundException, SQLException {
 	  // TODO Auto-generated method stub
 	  PasswordEncryptionService pes = new PasswordEncryptionService();
-	  if(password.getText().length() != 0 || confirmpassword.getText().length() != 0) {
-		  if(password.getText().equals(confirmpassword.getText())) {
-			  passwordMatch = true;
-			  try {
-				  byte[] salt = pes.generateSalt();
-				  byte[] encryptedPassword = pes.getEncryptedPassword(password.getText(), salt);
-				  //			  temp.setSalt(salt);
-				  //			  temp.setEncryptedPassword(encryptedPassword);
-				  return MySQLAccess.editUser(firstname.getText(), lastname.getText(), salt, encryptedPassword, userID);
-			  } catch (NoSuchAlgorithmException e) {
-				  // TODO Auto-generated catch block
-				  e.printStackTrace();
-			  } catch (InvalidKeySpecException e) {
-				  // TODO Auto-generated catch block
-				  e.printStackTrace();
+	  if(firstname.getText().length() != 0 && lastname.getText().length() != 0) {
+		  fill = true;
+		  if(password.getText().length() != 0 || confirmpassword.getText().length() != 0 || (password.getText().length() != 0 && confirmpassword.getText().length() != 0)) {
+			  if(password.getText().equals(confirmpassword.getText())) {
+				  passwordMatch = true;
+				  try {
+					  byte[] salt = pes.generateSalt();
+					  byte[] encryptedPassword = pes.getEncryptedPassword(password.getText(), salt);
+					  //			  temp.setSalt(salt);
+					  //			  temp.setEncryptedPassword(encryptedPassword);
+					  return MySQLAccess.editUser(firstname.getText(), lastname.getText(), salt, encryptedPassword, userID);
+				  } catch (NoSuchAlgorithmException e) {
+					  // TODO Auto-generated catch block
+					  e.printStackTrace();
+				  } catch (InvalidKeySpecException e) {
+					  // TODO Auto-generated catch block
+					  e.printStackTrace();
+				  }
+			  } else {
+				  //System.out.println("Passwords Don't Match");
+				  passwordMatch = false;
 			  }
-		  } else {
-			  //System.out.println("Passwords Don't Match");
-			  passwordMatch = false;
-		  }
 
+		  } else {
+			  passwordMatch = true;
+			  return MySQLAccess.editUser(firstname.getText(), lastname.getText(), userID);
+		  }
 	  } else {
-		  passwordMatch = true;
-		  return MySQLAccess.editUser(firstname.getText(), lastname.getText(), userID);
+		  fill = false;
 	  }
 	  return userID;
   }
 
-//  private void signUp() throws SQLException, ClassNotFoundException {
-//	  // TODO Auto-generated method stub
-//	  PasswordEncryptionService pes = new PasswordEncryptionService();
+  //  private void signUp() throws SQLException, ClassNotFoundException {
+  //	  // TODO Auto-generated method stub
+  //	  PasswordEncryptionService pes = new PasswordEncryptionService();
 //	  if (username.getLength() != 0 && firstname.getLength() != 0 && lastname.getLength() != 0 && password.getLength() != 0 && confirmpassword.getLength() != 0) {
 //		  fill = true;	  
 ////		  User temp = new User(username.getText());

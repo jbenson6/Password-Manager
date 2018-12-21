@@ -9,7 +9,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import application.PasswordEncryptionService;
-import javafx.scene.control.TextField;
 
 public class MySQLAccess {
 
