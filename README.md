@@ -18,7 +18,7 @@ CREATE TABLE `sites` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`user_name`),
   CONSTRAINT `sites_ibfk_1` FOREIGN KEY (`user_id`, `user_name`) REFERENCES `users` (`id`, `user_name`)
-) 
+); 
 
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -28,6 +28,6 @@ CREATE TABLE `users` (
   `salt` blob,
   `encrypted_password` blob,
   PRIMARY KEY (`id`,`user_name`)
-)
+);
 
 
