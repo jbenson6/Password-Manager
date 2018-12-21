@@ -6,6 +6,8 @@ Create the schema and tables yourself and create a user named password_manager i
 access password_manager schema. This can be done in the MySQL Workbench
 
 Table Format:
+create schema password_manager;
+use password_manager;
 CREATE TABLE `sites` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
