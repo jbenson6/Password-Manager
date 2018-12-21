@@ -273,13 +273,20 @@ public class MySQLAccess {
 		// Result set get the result of the SQL query
 		//resultSet = statement.executeQuery("select * from password_manager.users");
 		//writeResultSet(resultSet);
-		String query = "DELETE from users WHERE user_name=? && first_name=? && last_name=?"; 
+		String query = "DELETE from sites WHERE user_name=? && user_id=?"; 
 		PreparedStatement preparedStatement = connect.prepareStatement(query);
 		preparedStatement.setString(1, userID.getString("user_name"));
-		preparedStatement.setString(2, userID.getString("first_name"));
-		preparedStatement.setString(3, userID.getString("last_name"));
+		preparedStatement.setInt(2, userID.getInt("id"));
 
 		preparedStatement.execute();
+		
+		String query_2 = "DELETE from users WHERE user_name=? && first_name=? && last_name=?"; 
+		PreparedStatement preparedStatement_2 = connect.prepareStatement(query_2);
+		preparedStatement_2.setString(1, userID.getString("user_name"));
+		preparedStatement_2.setString(2, userID.getString("first_name"));
+		preparedStatement_2.setString(3, userID.getString("last_name"));
+
+		preparedStatement_2.execute();
 		connect.close();
 		
 	}
