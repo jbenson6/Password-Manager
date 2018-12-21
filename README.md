@@ -5,6 +5,8 @@ Need to have MySQL installed, along with the java connector. Connector must be i
 Create the schema and tables yourself and create a user named password_manager in MySQL that can only 
 access password_manager schema. This can be done in the MySQL Workbench
 
+Executable jar is in folder. Download jar and batch file. To run, either execute batch command in command prompt or double click batch file.
+
 Table Format:
 create schema password_manager;
 use password_manager;
