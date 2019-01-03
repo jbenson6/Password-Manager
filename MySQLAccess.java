@@ -11,7 +11,49 @@ import javax.crypto.spec.SecretKeySpec;
 import application.PasswordEncryptionService;
 
 public class MySQLAccess {
+public static void createDB() throws SQLException, ClassNotFoundException {
+		Connection connect = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		// Setup the connection with the DB
+		connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/password_manager", "password_manager", "");
+		String sql_stmt = "CREATE DATABASE IF NOT EXISTS  `password_manager`;";
+		Statement statement = connect.createStatement();
+		statement.executeUpdate(sql_stmt);
 
+
+		String sqlCreate = "CREATE TABLE IF NOT EXISTS " + "password_manager.users("
+				+ "`id` int(11) NOT NULL AUTO_INCREMENT,\n"
+				+ "`user_name` varchar(32) NOT NULL,\n"
+				+ "`first_name` varchar(32) NOT NULL,\n"
+				+ "`last_name` varchar(32) NOT NULL,\n"
+				+ "`salt` blob,\n"
+				+ "`encrypted_password` blob,\n"
+				+ "PRIMARY KEY (`id`,`user_name`)\n"
+				+ ");";
+
+
+		Statement stmt = connect.createStatement();
+		stmt.execute(sqlCreate);
+
+		String sqlCreate_2 = "CREATE TABLE IF NOT EXISTS " + "password_manager.sites(\n"
+				+"`id` int(11) NOT NULL AUTO_INCREMENT,\n"
+				+"`user_id` int(11) NOT NULL,\n"
+				+"`user_name` varchar(32) NOT NULL,\n"
+				+"`username` varchar(32) NOT NULL,\n"
+				+"`domain_name` varchar(32) NOT NULL,\n"
+				+"`url` varchar(32) NOT NULL,\n"
+				+"`cypher_text` blob,\n"
+				+"`secret_key` blob,\n"
+				+"PRIMARY KEY (`id`),\n"
+				+"KEY `user_id` (`user_id`,`user_name`),\n"
+				+"FOREIGN KEY (`user_id`, `user_name`) REFERENCES `users` (`id`, `user_name`)\n"
+				+");";
+
+
+				Statement stmt_2 = connect.createStatement();
+				stmt_2.execute(sqlCreate_2);
+	}
+	
     public static boolean addUser(String username, String firstname, String lastname, byte[] salt, byte[] encryptedPassword) throws SQLException, ClassNotFoundException {
     	// TODO Auto-generated method stub
     	boolean exists = false;
