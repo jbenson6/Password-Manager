@@ -23,6 +23,13 @@ public class LoginController {
   public void initialize() {}
   
   public void initManager(final LoginManager loginManager) {
+	  try {
+		MySQLAccess.createDB();
+	} catch (ClassNotFoundException | SQLException e2) {
+		// TODO Auto-generated catch block
+		e2.printStackTrace();
+	}  
+	  
     loginButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override public void handle(ActionEvent event) {
 		try {
