@@ -11,7 +11,6 @@ import application.LoginManager;
 public class Main extends Application {
 
 	public static void main(String[] args) throws Exception { 
-
 		launch(args); 
 		}
   @Override public void start(Stage primarystage) throws IOException {

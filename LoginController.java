@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
 import application.LoginManager;
+//import application.MySQLAccess;
 import java.sql.*;
 
 /** Controls the login screen */
@@ -23,7 +24,7 @@ public class LoginController {
   public void initialize() {}
   
   public void initManager(final LoginManager loginManager) {
-	  try {
+	try {
 		MySQLAccess.createDB();
 	} catch (ClassNotFoundException | SQLException e2) {
 		// TODO Auto-generated catch block

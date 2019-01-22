@@ -4,14 +4,14 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 import java.util.ArrayList;
-
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import application.PasswordEncryptionService;
 
 public class MySQLAccess {
-public static void createDB() throws SQLException, ClassNotFoundException {
+
+	public static void createDB() throws SQLException, ClassNotFoundException {
 		Connection connect = null;
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		// Setup the connection with the DB
@@ -53,7 +53,7 @@ public static void createDB() throws SQLException, ClassNotFoundException {
 				Statement stmt_2 = connect.createStatement();
 				stmt_2.execute(sqlCreate_2);
 	}
-	
+
     public static boolean addUser(String username, String firstname, String lastname, byte[] salt, byte[] encryptedPassword) throws SQLException, ClassNotFoundException {
     	// TODO Auto-generated method stub
     	boolean exists = false;
