@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?scenebuilder-stylesheet mainview.css?>
+
+<GridPane id="sp" alignment="CENTER" minHeight="605.0" minWidth="500.0" prefHeight="675.0" prefWidth="500.0" stylesheets="@areyousure.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="application.AreYouSureController">
+	<children>
+		<GridPane alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<VBox alignment="CENTER" maxHeight="585.0" maxWidth="480.0" minHeight="500.0" minWidth="400.0" prefHeight="675.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+					<children>
+						<GridPane prefHeight="99.0" prefWidth="480.0" VBox.vgrow="ALWAYS">
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+							<children>
+								<Text id="sessionLabel" fx:id="sessionLabel" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+                        <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" GridPane.halignment="RIGHT" />
+                        <Button fx:id="editButton" layoutX="435.0" layoutY="26.0" mnemonicParsing="false" text="Edit Profile" />
+							</children>
+						</GridPane>
+						<GridPane id="root" alignment="CENTER" maxHeight="575.0" prefWidth="458.0" VBox.vgrow="NEVER">
+							<columnConstraints>
+								<ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="458.0" minWidth="10.0" prefWidth="229.0" />
+								<ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="231.0" minWidth="0.0" prefWidth="229.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints fillHeight="false" maxHeight="250.0" minHeight="10.0" prefHeight="238.0" vgrow="SOMETIMES" />
+								<RowConstraints fillHeight="false" maxHeight="270.0" minHeight="10.0" prefHeight="252.0" vgrow="SOMETIMES" />
+								<RowConstraints fillHeight="false" maxHeight="270.0" minHeight="10.0" prefHeight="252.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+							<children>
+								<Button id="passwordsButton" fx:id="passwordsButton" alignment="CENTER" defaultButton="true" mnemonicParsing="false" text="Passwords" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+									<opaqueInsets>
+										<Insets />
+									</opaqueInsets>
+								</Button>
+								<Button id="logoutButton" fx:id="logoutButton" alignment="CENTER" defaultButton="true" mnemonicParsing="false" text="Logout" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+								<HBox id="passwordsSaved" prefHeight="113.0" prefWidth="210.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+									<children>
+										<VBox HBox.hgrow="ALWAYS">
+											<children>
+												<Text strokeType="OUTSIDE" strokeWidth="0.0" text="Passwords Saved: " VBox.vgrow="ALWAYS">
+													<font>
+														<Font size="18.0" />
+													</font>
+												</Text>
+												<Text id="savedPasswords" fx:id="savedPasswords" strokeType="OUTSIDE" strokeWidth="0.0" text="18" VBox.vgrow="ALWAYS">
+													<font>
+														<Font size="50.0" />
+													</font>
+												</Text>
+											</children>
+										</VBox>
+									</children>
+									<opaqueInsets>
+										<Insets />
+									</opaqueInsets>
+								</HBox>
+								<HBox id="unsafePasswords" prefHeight="100.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+									<children>
+										<VBox HBox.hgrow="ALWAYS">
+											<children>
+												<Text strokeType="OUTSIDE" strokeWidth="0.0" text="Unsafe Passwords: " VBox.vgrow="ALWAYS">
+													<font>
+														<Font size="18.0" />
+													</font>
+												</Text>
+												<Text id="unsafePasswords" fx:id="unsafePasswords" strokeType="OUTSIDE" strokeWidth="0.0" text="18" VBox.vgrow="ALWAYS">
+													<font>
+														<Font size="50.0" />
+													</font>
+												</Text>
+											</children>
+										</VBox>
+									</children>
+								</HBox>
+							</children>
+							<padding>
+								<Insets bottom="10.0" />
+							</padding>
+							<opaqueInsets>
+								<Insets />
+							</opaqueInsets>
+						</GridPane>
+					</children>
+				</VBox>
+            <GridPane alignment="CENTER">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.5" minWidth="10.0" prefWidth="64.5" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="329.0" minWidth="10.0" prefWidth="329.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.5" minWidth="10.0" prefWidth="64.5" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="273.0" minHeight="10.0" prefHeight="273.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="104.0" minHeight="4.0" prefHeight="9.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <VBox id="areyousure" fx:id="areyousure" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" stylesheets="@areyousure.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Are You Sure?" VBox.vgrow="NEVER">
+                           <font>
+                              <Font size="49.0" />
+                           </font>
+                        </Text>
+                        <GridPane prefHeight="133.0" prefWidth="307.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.0" minWidth="10.0" prefWidth="153.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="165.0" minWidth="10.0" prefWidth="154.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Button id="areyousureyes" fx:id="areyousureyes" mnemonicParsing="false" stylesheets="@areyousure.css" text="Yes" GridPane.halignment="CENTER">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                              <Button id="areyousureno" fx:id="areyousureno" alignment="BOTTOM_RIGHT" contentDisplay="BOTTOM" mnemonicParsing="false" stylesheets="@areyousure.css" text="No" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </children>
+            </GridPane>
+			</children>
+		</GridPane>
+	</children>
+	<padding>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+	</padding>
+	<columnConstraints>
+		<ColumnConstraints halignment="CENTER" />
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints maxHeight="616.0" minHeight="269.0" prefHeight="328.0" valignment="CENTER" vgrow="NEVER" />
+      <RowConstraints maxHeight="386.0" minHeight="10.0" prefHeight="327.0" valignment="CENTER" vgrow="NEVER" />
+	</rowConstraints>
+</GridPane>

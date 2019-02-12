@@ -81,9 +81,8 @@ public class MainViewController {
 	  deleteButton.setOnAction(new EventHandler<ActionEvent>() {
 		  @Override public void handle(ActionEvent event) {
 			  try {
-				MySQLAccess.deleteUser(userID);
-				loginManager.logout();
-			} catch (ClassNotFoundException | SQLException e) {
+				loginManager.showAreYouSureView(userID);
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
